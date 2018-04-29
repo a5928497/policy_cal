@@ -12,6 +12,7 @@ $(function () {
 
     //点击添加策略按钮，新增一行策略
     $add_BTN.click(function () {
+
         $plc_container.append("<div id=\'plc"+count+ "\'>\n"+
             "            <label>策略"+count+"：</label>\n" +
             "            <select class=\'MorP\' name=\'MorP" + count + "\'>\n" +
@@ -22,6 +23,13 @@ $(function () {
             "            <span id=\'statu"+count+"\'>送</span>\n" +
             "            <input type=\'text\' size=\'1\'>"+
             "            <button class=\'del_plc_BTN\' name=\'"+count+"\'>删除</button> "+"</div>");
+        if(count >2){
+            //隐藏上一个删除按钮
+            var prev_BTN = "button[name='"+(count-1) +"']";
+            var $prev_BTN = $(prev_BTN);
+            $prev_BTN.hide();
+        }
+
         count=count+1;
         return false;
     })
@@ -29,6 +37,7 @@ $(function () {
     //点击删除按钮删除当前策略行
     $plc_container.on("click",".del_plc_BTN",function () {
        $(this).parent().remove();
+       count = count-1;
         return false;
     })
 
