@@ -9,9 +9,12 @@ $(function () {
     var count = 2;
     var $plc_num = $("#plc_num");
     var $heightlight = $(".hightlight");
+    var $multi_form = $("#multi_product");
+    var $single_form = $("#single_product");
     //初始化页面
     $pd_amount.hide();
     $heightlight.css("color","red").css("font-weight","900");
+    $multi_form.hide();
 
     //点击添加策略按钮，新增一行策略
     $add_BTN.click(function () {
@@ -23,7 +26,7 @@ $(function () {
             "                <option value=\'0\'>减免金额</option>\n" +
             "            </select>\n" +
             "            <span id=\"plc"+ count+ "_text\">"+
-            "            <input type=\'text\' size=\'1\'>送\n" +
+            "            满<input type=\'text\' size=\'1\'>箱送\n" +
             "            <input type=\'text\' size=\'1\'>箱+\n" +
             "            <input type=\"text\" size=\"1\">支</span>"+
             "            <button class=\'del_plc_BTN\' name=\'"+count+"\'>删除</button> "+"</div>");
@@ -68,12 +71,12 @@ $(function () {
         $span_text.empty();
          //等于0，减钱
         if (MorP_select == "0") {
-            $span_text.append("            <input type=\'text\' size=\'1\'>减\n" +
+            $span_text.append("            每箱<input type=\'text\' size=\'1\'>减\n" +
                     "            <input type=\'text\' size=\'1\'>元\n");
         }
         //等于1，赠送
         if (MorP_select == "1") {
-            $span_text .append("<input type=\'text\' size=\'1\'>送\n" +
+            $span_text .append("满<input type=\'text\' size=\'1\'>箱送\n" +
                     "            <input type=\'text\' size=\'1\'>箱+\n" +
                     "            <input type=\"text\" size=\"1\">支");
         }
@@ -84,10 +87,14 @@ $(function () {
     $isSingle.change(function () {
         var $opt_select = $(this).find("option:selected").val();
         if ($opt_select == "0") {
+            $multi_form.show();
+            $single_form.hide();
             $pd_amount.show();
         }
         if ($opt_select == "1") {
+            $multi_form.hide();
             $pd_amount.hide();
+            $single_form.show();
             $amount_num.val("1")
             $std.empty();
             $std.append(" <label>商品规格：1*</label><input type=\'text\' size=\'1\'><br>");
