@@ -18,22 +18,32 @@
         <span id="pd_amount"><lable>数量</lable><input id="amount_num" type="text" size="1" th:value="1"></span>
         <br>
 
-        <!--商品规格容器-->
+        <!--单一商品计算-->
+        <!--商品参数容器-->
         <div id="std_container">
             <label>商品规格：1*</label><input type='text' size='1'><br>
+            <label>产品价格（单支）：</label><input type="text" size="2">元<br>
+            <label>生效数量：</label>大于<input type="text" size="2"><span class="hightlight">支</span><br>
+            小于（可不填）<input type="text" size="2"><span class="hightlight">支</span>
         </div>
         <!--添加策略按钮-->
         <button id="add_policy">添加策略</button>
+        <!--策略数-->
+        <input type="hidden" id="plc_num" name="plc_num" value="1">
         <!--赠送策略容器-->
         <div id="plc_container">
+            <div id="plc1">
             <label>策略1：</label>
             <select class="MorP" name="MorP1">
                 <option value="1">赠送商品</option>
                 <option value="0">减免金额</option>
             </select>
-            <input type="text" size="1">
-            <span id="statu1">送</span>
-            <input type="text" size="1"><br>
+            <span id="plc1_text">
+                <input type="text" size="1">送
+                <input type="text" size="1">箱+
+                <input type="text" size="1">支
+            </span>
+            </div>
         </div>
     </form>
     <script type="text/javascript" src="" th:src="@{/webjars/jquery/1.11.1/jquery.js}"></script>
