@@ -4,13 +4,39 @@ $(function () {
     var $amount_num = $("#amount_num");
     var $std = $("#std_container");
     var $MorP = $(".MorP");
+    var $add_BTN = $("#add_policy");
+    var $plc_container = $("#plc_container");
+    var count = 2;
     //初始隐藏
     $pd_amount.hide();
 
-    //选择赠送则显示送，选择减钱则显示减
-    $MorP.change(function () {
+    //点击添加策略按钮，新增一行策略
+    $add_BTN.click(function () {
+        $plc_container.append("<div id=\'plc"+count+ "\'>\n"+
+            "            <label>策略"+count+"：</label>\n" +
+            "            <select class=\'MorP\' name=\'MorP" + count + "\'>\n" +
+            "                <option value=\'1\'>赠送商品</option>\n" +
+            "                <option value=\'0\'>减免金额</option>\n" +
+            "            </select>\n" +
+            "            <input type=\'text\' size=\'1\'>\n" +
+            "            <span id=\'statu"+count+"\'>送</span>\n" +
+            "            <input type=\'text\' size=\'1\'>"+
+            "            <button class=\'del_plc_BTN\' name=\'"+count+"\'>删除</button> "+"</div>");
+        count=count+1;
+        return false;
+    })
+
+    //点击删除按钮删除当前策略行
+    $plc_container.on("click",".del_plc_BTN",function () {
+       $(this).parent().remove();
+        return false;
+    })
+
+    //选择赠送则显示送，选择减钱则显示减，使用事件委派
+    $plc_container.on("change","select",function () {
         var $MorP_select = $(this).find("option:selected").val();
         var span_num = "#statu" + $(this).attr("name").substring(4,7);
+        console.log(span_num);
         var $span = $(span_num);
         //等于0，减钱
         if ($MorP_select == "0") {
@@ -21,6 +47,7 @@ $(function () {
             $span.html("送")
         }
     })
+
 
     //选择多个商品时显示数目
     $isSingle.change(function () {
