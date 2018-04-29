@@ -13,9 +13,10 @@
             <option value="1">单一商品</option>
             <option value="0">多个商品</option>
         </select>
-        <span id="pd_amount"><lable>数量</lable><input type="text" size="1"></span>
+        <span id="pd_amount"><lable>数量</lable><input id="amount_num" type="text" size="1" th:value="1"></span>
         <br>
-        <label>商品规格：1*</label><input type="text" size="1"><br>
+        <div id="std_container">
+        </div>
 
     </form>
     <script type="text/javascript" src="" th:src="@{/webjars/jquery/1.11.1/jquery.js}"></script>
