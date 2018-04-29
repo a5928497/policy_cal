@@ -15,7 +15,7 @@
         <option value="0">多个商品</option>
     </select>
 
-    <form id="multi_product" action="post">
+    <form id="multi_product" method="post">
         <!--混合商品计算-->
         <span id="pd_amount"><lable>商品数量</lable><input id="amount_num" type="text" size="1" th:value="1"></span>
         <br>
@@ -25,14 +25,14 @@
         <input type="submit" value="计算">
     </form>
 
-    <form id="single_product" action="post">
+    <form id="single_product" method="post">
         <!--单一商品计算-->
         <!--商品参数容器-->
         <div id="s_std_container">
-            <label>商品规格：1*</label><input type='text' size='1'><br>
-            <label>产品价格（单支）：</label><input type="text" size="2">元<br>
-            <label>生效数量：</label>大于<input type="text" size="2"><span class="hightlight">支</span><br>
-            小于（可不填）<input type="text" size="2"><span class="hightlight">支</span>
+            <label>商品规格：1*</label><input type='text' size='1' name="spec"><br>
+            <label>产品价格（单支）：</label><input type="text" size="2" name="price">元<br>
+            <label>生效数量：</label>大于等于<input type="text" size="2" name="min"><span class="hightlight">支</span><br>
+            小于（可不填）<input type="text" size="2" name="max"><span class="hightlight">支</span>
         </div>
         <!--添加策略按钮-->
         <button id="add_policy">添加策略</button>
@@ -47,9 +47,9 @@
                 <option value="0">减免金额</option>
             </select>
             <span  id="plc1_text">
-                满<input type="text" size="1">箱送
-                <input type="text" size="1">箱+
-                <input type="text" size="1">支
+                满<input type="text" size="1" name="p_box1">箱送
+                <input type="text" size="1" name="box1">箱+
+                <input type="text" size="1" name="bottle1">支
             </span>
             </div>
         </div>

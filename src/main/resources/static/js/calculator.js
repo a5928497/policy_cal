@@ -26,9 +26,9 @@ $(function () {
             "                <option value=\'0\'>减免金额</option>\n" +
             "            </select>\n" +
             "            <span id=\"plc"+ count+ "_text\">"+
-            "            满<input type=\'text\' size=\'1\'>箱送\n" +
-            "            <input type=\'text\' size=\'1\'>箱+\n" +
-            "            <input type=\"text\" size=\"1\">支</span>"+
+            "            满<input type=\'text\' size=\'1\' name=\'p_box"+count+"\'>箱送\n" +
+            "            <input type=\'text\' size=\'1\' name=\'box"+count+"\'>箱+\n" +
+            "            <input type=\"text\" size=\"1\" name=\'bottle"+count+"\'>支</span>"+
             "            <button class=\'del_plc_BTN\' name=\'"+count+"\'>删除</button> "+"</div>");
         if(count >2){
             //隐藏上一个删除按钮
@@ -66,19 +66,21 @@ $(function () {
         var MorP_select = $(this).find("option:selected").val();
         var span_text = "#"+$(this).parent().attr("id")+"_text";
         var $span_text = $(span_text);
+        var plc_num = $(this).parent().attr("id").substring(3,6);
+        console.log(plc_num);
         console.log(span_text);
         console.log(MorP_select);
         $span_text.empty();
          //等于0，减钱
         if (MorP_select == "0") {
-            $span_text.append("            每箱<input type=\'text\' size=\'1\'>减\n" +
-                    "            <input type=\'text\' size=\'1\'>元\n");
+            $span_text.append("            每箱<input type=\'text\' size=\'1\' name=\'pbox"+plc_num+"'>减\n" +
+                    "            <input type=\'text\' size=\'1\' name=\'money"+plc_num+"\'>元\n");
         }
         //等于1，赠送
         if (MorP_select == "1") {
-            $span_text .append("满<input type=\'text\' size=\'1\'>箱送\n" +
-                    "            <input type=\'text\' size=\'1\'>箱+\n" +
-                    "            <input type=\"text\" size=\"1\">支");
+            $span_text .append("满<input type=\'text\' size=\'1\' name=\'p_box"+plc_num+"\'>箱送\n" +
+                    "            <input type=\'text\' size=\'1\' name=\'box"+plc_num+"\'>箱+\n" +
+                    "            <input type=\"text\" size=\"1\" name=\'bottle"+plc_num+"\'>支");
         }
     })
 
