@@ -19,4 +19,12 @@ public class PPolicy extends  Policy{
     public void setBottle(int bottle) {
         this.bottle = bottle;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+"PPolicy{" +
+                "box=" + box +
+                ", bottle=" + bottle +
+                '}';
+    }
 }
