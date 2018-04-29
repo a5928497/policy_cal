@@ -22,7 +22,7 @@ $(function () {
             "                <option value=\'1\'>赠送商品</option>\n" +
             "                <option value=\'0\'>减免金额</option>\n" +
             "            </select>\n" +
-            "            <span id=\"pcl"+ count+ "_text\">"+
+            "            <span id=\"plc"+ count+ "_text\">"+
             "            <input type=\'text\' size=\'1\'>送\n" +
             "            <input type=\'text\' size=\'1\'>箱+\n" +
             "            <input type=\"text\" size=\"1\">支</span>"+
@@ -61,23 +61,22 @@ $(function () {
     //选赠送显示商品、减钱显示元
     $plc_container.on("change","select",function () {
         var MorP_select = $(this).find("option:selected").val();
-        var span_num = "#"+$(this).parent().attr("id")+"_text";
-        console.log(span_num);
+        var span_text = "#"+$(this).parent().attr("id")+"_text";
+        var $span_text = $(span_text);
+        console.log(span_text);
         console.log(MorP_select);
-        var $span_text = $(span_num);
-        var aaa = $span_text.html();
-        console.log(aaa)
-        //  //等于0，减钱
-        // if (MorP_select == "0") {
-        //     $span_text.append("            <input type=\'text\' size=\'1\'>减\n" +
-        //             "            <input type=\'text\' size=\'1\'>元\n");
-        // }
-        // //等于1，赠送
-        // if (MorP_select == "1") {
-        //     $span_text .append("<input type=\'text\' size=\'1\'>送\n" +
-        //             "            <input type=\'text\' size=\'1\'>箱+\n" +
-        //             "            <input type=\"text\" size=\"1\">支");
-        // }
+        $span_text.empty();
+         //等于0，减钱
+        if (MorP_select == "0") {
+            $span_text.append("            <input type=\'text\' size=\'1\'>减\n" +
+                    "            <input type=\'text\' size=\'1\'>元\n");
+        }
+        //等于1，赠送
+        if (MorP_select == "1") {
+            $span_text .append("<input type=\'text\' size=\'1\'>送\n" +
+                    "            <input type=\'text\' size=\'1\'>箱+\n" +
+                    "            <input type=\"text\" size=\"1\">支");
+        }
     })
 
 
