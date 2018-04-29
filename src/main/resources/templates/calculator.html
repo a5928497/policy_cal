@@ -8,6 +8,8 @@
 <body>
     <h1>政策计算器</h1>
     <form action="post">
+
+        <!--选择单个或多个商品进行计算-->
         <label>计算参数</label>
         <select id="isSingle" name="isSingle">
             <option value="1">单一商品</option>
@@ -15,9 +17,23 @@
         </select>
         <span id="pd_amount"><lable>数量</lable><input id="amount_num" type="text" size="1" th:value="1"></span>
         <br>
+
+        <!--商品规格容器-->
         <div id="std_container">
+            <label>商品规格：1*</label><input type='text' size='1'><br>
         </div>
 
+        <!--赠送策略容器-->
+        <div id="plc_container">
+            <label>策略1：</label>
+            <select class="MorP" name="MorP1">
+                <option value="1">赠送商品</option>
+                <option value="0">减免金额</option>
+            </select>
+            <input type="text" size="1">
+            <span id="statu1">送</span>
+            <input type="text" size="1">
+        </div>
     </form>
     <script type="text/javascript" src="" th:src="@{/webjars/jquery/1.11.1/jquery.js}"></script>
     <script type="text/javascript" src="js/calculator.js" th:src="@{/js/calculator.js}"></script>
