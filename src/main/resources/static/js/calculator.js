@@ -73,7 +73,7 @@ $(function () {
         $span_text.empty();
          //等于0，减钱
         if (MorP_select == "0") {
-            $span_text.append("            每箱<input type=\'text\' size=\'1\' name=\'pbox"+plc_num+"'>减\n" +
+            $span_text.append("            每箱<input type=\'text\' size=\'1\' name=\'p_box"+plc_num+"'>减\n" +
                     "            <input type=\'text\' size=\'1\' name=\'money"+plc_num+"\'>元\n");
         }
         //等于1，赠送
