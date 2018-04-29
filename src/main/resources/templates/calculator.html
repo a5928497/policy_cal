@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>calculator</title>
+    <script src="../static/js/calculator.js"></script>
 </head>
 <body>
     <h1>政策计算器</h1>
     <form action="post">
         <label>计算参数</label>
-        <select name="isSingle">
-            <option value="1" >单一商品</option>
-            <option value="0" >多个商品</option>
+        <select id="isSingle" name="isSingle">
+            <option value="1">单一商品</option>
+            <option value="0">多个商品</option>
         </select>
         <span id="pd_amount"><lable>数量</lable><input type="text" size="1"></span>
         <br>
