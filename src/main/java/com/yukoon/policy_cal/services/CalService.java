@@ -76,7 +76,7 @@ public class CalService {
                         strategy1:赠送整箱规格的公式
                         strategy2:赠送单支规格的公式
                          */
-                        int times  = spec/bottle;
+                        int times  = calUtil.min_common(spec,bottle)/bottle;
                         int amount = spec * pBox;
                         int std = times * amount;
                         int box_num  = (box * times) + (bottle*times)/spec;
@@ -84,11 +84,9 @@ public class CalService {
                         //BOX = Floor(数量%std)==0?Floor(数量%std)*box_num:box+Floor(数量%std)*box_num
                         strategy1 = "Floor( 数量 %" + std + ")==0?Floor(数量 % " + std + ")*" + box_num  +
                         ":" + box + "+Floor(数量%" + std + ") *"  + box_num;
-                        //Bottle =Floor(数量%std)==0?0:bottle * Floor((数量%std)/amount))
+                        //Bottle =Floor(数量%std)==0?0:bottle * Floor((数量%std)/amount)
                         strategy2 = "Floor( 数量 % " +std + ")==0 ? 0 :" + bottle + "* Floor((数量 %" + std +
-                        " ) /" + amount + "))";
-                    }else {
-                        //若赠送指数不能被规格整除
+                        " ) /" + amount + ")";
                     }
                 }
                 result.setStrategy1(strategy1);
