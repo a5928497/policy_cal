@@ -47,7 +47,7 @@ public class CalService {
                     strategy = "Floor(数量 / " + spec + " ) * " +  ((MPolicy) policy).getMoney();
                 }
                 result.setStrategy1(strategy);
-                result.setStrategy2("-----");
+                result.setStrategy2("---本策略为金额减免策略--");
             }
             //判断是否赠货
             if(policy instanceof PPolicy){
