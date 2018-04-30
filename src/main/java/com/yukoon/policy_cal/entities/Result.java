@@ -3,14 +3,23 @@ package com.yukoon.policy_cal.entities;
 public class Result {
     private String name;
     private  String condition;
-    private  String strategy;
+    private  String strategy1;
+    private String strategy2;
 
-    public String getStrategy() {
-        return strategy;
+    public String getStrategy1() {
+        return strategy1;
     }
 
-    public void setStrategy(String strategy) {
-        this.strategy = strategy;
+    public void setStrategy1(String strategy1) {
+        this.strategy1 = strategy1;
+    }
+
+    public String getStrategy2() {
+        return strategy2;
+    }
+
+    public void setStrategy2(String strategy2) {
+        this.strategy2 = strategy2;
     }
 
     public String getName() {
@@ -34,7 +43,8 @@ public class Result {
         return "Result{" +
                 "name='" + name + '\'' +
                 ", condition='" + condition + '\'' +
-                ", strategy='" + strategy + '\'' +
+                ", strategy1='" + strategy1 + '\'' +
+                ", strategy2='" + strategy2 + '\'' +
                 '}';
     }
 }

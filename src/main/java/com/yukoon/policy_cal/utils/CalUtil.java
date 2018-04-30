@@ -28,5 +28,6 @@ public class CalUtil {
     public static void main(String[] args) {
         CalUtil calUtil = new CalUtil();
         System.out.println(calUtil.canDivided(2,4));
+        System.out.println((192%144)/24*4);
     }
 }

@@ -46,7 +46,8 @@ public class CalService {
                 }else {
                     strategy = "Floor(数量 / " + spec + " ) * " +  ((MPolicy) policy).getMoney();
                 }
-                result.setStrategy(strategy);
+                result.setStrategy1(strategy);
+                result.setStrategy2("-----");
             }
             //判断是否赠货
             if(policy instanceof PPolicy){
@@ -56,7 +57,7 @@ public class CalService {
                 int box = ((PPolicy) policy).getBox();
                 //生成策略
                 String strategy1 = null;
-                String strategy2;
+                String strategy2 = null;
                 if (bottle == 0){
                     //整箱赠送，公式=满X箱赠送Y箱
                     strategy1 = "Floor(数量 / "+ (spec*pBox) + " ) * " + ((PPolicy) policy).getBox();
@@ -71,6 +72,7 @@ public class CalService {
                         amount：将赠送箱数转换为支数
                         std：套餐可以转换为整箱的最少支数
                         box_num：套餐重复取整后得到的赠送箱数
+                        repeat_times = 数量%std/con_amount
                          */
                         int times  = spec/bottle;
                         int amount = spec * pBox;
@@ -80,14 +82,15 @@ public class CalService {
                         //BOX = Floor(数量%std)==0?Floor(数量%std)*box_num:box+Floor(数量%std)*box_num
                         strategy1 = "Floor( 数量 %" + std + ")==0?Floor(数量 % " + std + ")*" + box_num  +
                         ":" + box + "+Floor(数量%" + std + ") *"  + box_num;
+                        //Bottle =Floor(数量%std)==0?0:bottle * Floor((数量%std)/amount))
+                        strategy2 = "Floor( 数量 % " +std + ")==0 ? 0 :" + bottle + "* Floor((数量 %" + std +
+                        " ) /" + amount + "))";
                     }else {
                         //若赠送指数不能被规格整除
                     }
-                    bottle = spec%bottle;
-                    // Floor(数量/spec * pbox) +
-                    strategy2 = "";
                 }
-                result.setStrategy(strategy1);
+                result.setStrategy1(strategy1);
+                result.setStrategy2(strategy2);
             }
             final_result.add(result);
         }
