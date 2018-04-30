@@ -1,6 +1,7 @@
 package com.yukoon.policy_cal.services;
 
 import com.yukoon.policy_cal.entities.*;
+import com.yukoon.policy_cal.utils.CalUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 @Service
 public class CalService {
     public List<Result> singleProduct(Product product){
+        CalUtil calUtil = new CalUtil();
         List<Policy> list = product.getList();
         List<Result> final_result = new ArrayList<>();
         for (int i = 0;i<list.size();i++){
@@ -45,22 +47,49 @@ public class CalService {
                     strategy = "Floor(数量 / " + spec + " ) * " +  ((MPolicy) policy).getMoney();
                 }
                 result.setStrategy(strategy);
-                final_result.add(result);
             }
             //判断是否赠货
             if(policy instanceof PPolicy){
                 //获取bottle
                 int bottle = ((PPolicy) policy).getBottle();
+                //获取box
+                int box = ((PPolicy) policy).getBox();
                 //生成策略
-                String strategy;
+                String strategy1 = null;
+                String strategy2;
                 if (bottle == 0){
                     //整箱赠送，公式=满X箱赠送Y箱
-                    strategy = "Flooro(数量 / "+ product;
+                    strategy1 = "Floor(数量 / "+ (spec*pBox) + " ) * " + ((PPolicy) policy).getBox();
                 }else {
-                    //非整箱赠送
+                    //非整箱赠送，公式=满X箱赠送Y箱+Z支
+                    boolean flag = calUtil.canDivided(spec,bottle);
+                    if (flag == true){
+                        //若赠送支数能被规格整除
+                        /*
+                        参数说明：
+                        times1:对于赠送支数来说，套餐重复多少次会变成整箱
+                        amount：将赠送箱数转换为支数
+                        std：套餐可以转换为整箱的最少支数
+                        box_num：套餐重复取整后得到的赠送箱数
+                         */
+                        int times  = spec/bottle;
+                        int amount = spec * pBox;
+                        int std = times * amount;
+                        int box_num  = (box * times) + (bottle*times)/spec;
+                        System.out.println(times);System.out.println(amount);System.out.println(std);System.out.println(times);System.out.println(box_num);
+                        //BOX = Floor(数量%std)==0?Floor(数量%std)*box_num:box+Floor(数量%std)*box_num
+                        strategy1 = "Floor( 数量 %" + std + ")==0?Floor(数量 % " + std + ")*" + box_num  +
+                        ":" + box + "+Floor(数量%" + std + ") *"  + box_num;
+                    }else {
+                        //若赠送指数不能被规格整除
+                    }
+                    bottle = spec%bottle;
+                    // Floor(数量/spec * pbox) +
+                    strategy2 = "";
                 }
-
+                result.setStrategy(strategy1);
             }
+            final_result.add(result);
         }
         return final_result;
     }
