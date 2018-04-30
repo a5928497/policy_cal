@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+    <table border="1" >
+        <thead>
+        <tr>
+            <td>策略名</td>
+            <td>条件</td>
+            <td>整箱/减免策略</td>
+            <td>单支策略</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="result:${results}">
+            <td th:text="${result.name}">name</td>
+            <td th:text="${result.condition}">condition</td>
+            <td th:text="${result.strategy1}">strategy1</td>
+            <td th:text="${result.strategy2}">strategy2</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

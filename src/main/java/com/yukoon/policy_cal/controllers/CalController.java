@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class CalController {
@@ -26,9 +27,8 @@ public class CalController {
         return "calculator";
     }
 
-    @ResponseBody
-    @PostMapping("/single")
-    public String calSingle(HttpServletRequest request, Product product) {
+@PostMapping("/single")
+    public String calSingle(HttpServletRequest request, Product product, Map<String,Object> map) {
         //策略数
         int plc_num = Integer.parseInt(request.getParameter("plc_num"));
 
@@ -58,6 +58,7 @@ public class CalController {
         }
         product.setList(list);
         System.out.println(product);
-        return calService.singleProduct(product).toString();
+        map.put("results",calService.singleProduct(product));
+        return "result";
     }
 }

@@ -73,6 +73,8 @@ public class CalService {
                         std：套餐可以转换为整箱的最少支数
                         box_num：套餐重复取整后得到的赠送箱数
                         repeat_times = 数量%std/con_amount
+                        strategy1:赠送整箱规格的公式
+                        strategy2:赠送单支规格的公式
                          */
                         int times  = spec/bottle;
                         int amount = spec * pBox;
