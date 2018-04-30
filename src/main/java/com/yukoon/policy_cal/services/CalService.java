@@ -69,10 +69,10 @@ public class CalService {
                         //若赠送支数能被规格整除
                         /*
                         参数说明：
-                        times1:对于赠送支数来说，套餐重复多少次会变成整箱
+                        times:对于赠送支数来说，套餐重复多少次会变成整箱
                         amount：将赠送箱数转换为支数
-                        std：套餐可以转换为整箱的最少支数
-                        box_num：套餐重复取整后得到的赠送箱数
+                        std：所有赠品可以转换为整箱的最少出货支数
+                        box_num：所有赠品取整后得到的赠送箱数
                         repeat_times = 数量%std/con_amount
                         strategy1:赠送整箱规格的公式
                         strategy2:赠送单支规格的公式
@@ -88,6 +88,13 @@ public class CalService {
                         //Bottle =Floor(数量%std)==0?0:bottle * Floor((数量%std)/amount)
                         strategy2 = "Floor( 数量 % " +std + ")==0 ? 0 :" + bottle + "* Floor((数量 %" + std +
                         " ) /" + amount + ")";
+                    }else {
+                        //若赠送支数不能能被规格整除
+                        /*
+                        参数说明：
+                        times:对于赠送支数来说，套餐重复多少次会变成整箱
+                         */
+                        int times  = calUtil.min_common(spec,bottle)/bottle;
                     }
                 }
                 result.setStrategy1(strategy1);
