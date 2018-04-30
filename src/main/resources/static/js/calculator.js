@@ -28,7 +28,7 @@ $(function () {
             "            <span id=\"plc"+ count+ "_text\">"+
             "            满<input type=\'text\' size=\'1\' name=\'p_box"+count+"\'>箱送\n" +
             "            <input type=\'text\' size=\'1\' name=\'box"+count+"\'>箱+\n" +
-            "            <input type=\"text\" size=\"1\" name=\'bottle"+count+"\'>支</span>"+
+            "            <input type=\"text\" value=\'0\' size=\"1\" name=\'bottle"+count+"\'>支</span>"+
             "            <button class=\'del_plc_BTN\' name=\'"+count+"\'>删除</button> "+"</div>");
         if(count >2){
             //隐藏上一个删除按钮
@@ -80,10 +80,9 @@ $(function () {
         if (MorP_select == "1") {
             $span_text .append("满<input type=\'text\' size=\'1\' name=\'p_box"+plc_num+"\'>箱送\n" +
                     "            <input type=\'text\' size=\'1\' name=\'box"+plc_num+"\'>箱+\n" +
-                    "            <input type=\"text\" size=\"1\" name=\'bottle"+plc_num+"\'>支");
+                    "            <input type=\"text\" value=\'0\' size=\"1\" name=\'bottle"+plc_num+"\'>支");
         }
     })
-
 
     //选择多个商品时显示数目
     $isSingle.change(function () {
