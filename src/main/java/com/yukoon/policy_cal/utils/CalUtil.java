@@ -50,7 +50,7 @@ public class CalUtil {
 
     public static void main(String[] args) {
         CalUtil calUtil = new CalUtil();
-        System.out.println(calUtil.canDivided(2,4));
+        System.out.println(calUtil.canDivided(6,7));
         System.out.println((120%1440));
         System.out.println(calUtil.min_common(24,4));
     }

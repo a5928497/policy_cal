@@ -61,10 +61,11 @@ public class CalService {
                 if (bottle == 0){
                     //整箱赠送，公式=满X箱赠送Y箱
                     strategy1 = "Floor(数量 / "+ (spec*pBox) + " ) * " + ((PPolicy) policy).getBox();
+                    strategy2 = "不需要设置单支策略";
                 }else {
                     //非整箱赠送，公式=满X箱赠送Y箱+Z支
                     boolean flag = calUtil.canDivided(spec,bottle);
-                    if (flag == true){
+                    if (flag){
                         //若赠送支数能被规格整除
                         /*
                         参数说明：
