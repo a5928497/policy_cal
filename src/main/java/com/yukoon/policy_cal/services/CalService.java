@@ -63,39 +63,19 @@ public class CalService {
                     strategy1 = "Floor(数量 / "+ (spec*pBox) + " ) * " + ((PPolicy) policy).getBox();
                     strategy2 = "不需要设置单支策略";
                 }else {
-                    //非整箱赠送，公式=满X箱赠送Y箱+Z支
-                    boolean flag = calUtil.canDivided(spec,bottle);
-                    if (flag){
-                        //若赠送支数能被规格整除
+                        //非整箱赠送，公式=满X箱赠送Y箱+Z支
                         /*
                         参数说明：
-                        times:对于赠送支数来说，套餐重复多少次会变成整箱
+                        change_times:对于赠送支数来说，重复到数量足够转箱的次数
                         amount：将赠送箱数转换为支数
-                        std：所有赠品可以转换为整箱的最少出货支数
-                        box_num：所有赠品取整后得到的赠送箱数
-                        repeat_times = 数量%std/con_amount
-                        strategy1:赠送整箱规格的公式
-                        strategy2:赠送单支规格的公式
                          */
-                        int times  = calUtil.min_common(spec,bottle)/bottle;
+                        int chang_times = (int)Math.ceil(spec/bottle);
                         int amount = spec * pBox;
-                        int std = times * amount;
-                        int box_num  = (box * times) + (bottle*times)/spec;
-                        System.out.println(times);System.out.println(amount);System.out.println(std);System.out.println(times);System.out.println(box_num);
-                        //BOX = Floor(数量%std)==0?Floor(数量%std)*box_num:box+Floor(数量%std)*box_num
-                        strategy1 = "Floor( 数量 %" + std + ")==0?Floor(数量 % " + std + ")*" + box_num  +
-                        ":" + box + "+Floor(数量%" + std + ") *"  + box_num;
-                        //Bottle =Floor(数量%std)==0?0:bottle * Floor((数量%std)/amount)
-                        strategy2 = "Floor( 数量 % " +std + ")==0 ? 0 :" + bottle + "* Floor((数量 %" + std +
-                        " ) /" + amount + ")";
-                    }else {
-                        //若赠送支数不能能被规格整除
-                        /*
-                        参数说明：
-                        times:对于赠送支数来说，套餐重复多少次会变成整箱
-                         */
-                        int times  = calUtil.min_common(spec,bottle)/bottle;
-                    }
+                        //BOX = Floor(数量/amount)*box + Floor(数量/(amount*change_times))
+                        strategy1 = "(Floor(数量/" + amount + ")*" +box + ")+ (Floor(数量/(" + amount + "*" + chang_times + ")))";
+                        //Bottle = Floor(数量/amount) * bottle - Floor(数量/amount*change_times)*spec
+                        strategy2 = "(Floor(数量/" + amount + ") * " + bottle + ")- (Floor(数量/(" + amount + "*" + chang_times +
+                                ")) * " + spec + ")";
                 }
                 result.setStrategy1(strategy1);
                 result.setStrategy2(strategy2);
