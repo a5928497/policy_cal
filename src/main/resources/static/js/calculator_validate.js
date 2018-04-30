@@ -1,5 +1,6 @@
 $(function () {
     $spec = $("#spec");
+    $spec_msg = $("#spec_msg");
     $price = $("#price");
     $price_msg  = $("#price_msg");
     $min = $("#min");
@@ -14,12 +15,12 @@ $(function () {
         var flag = true;
         if ($spec.val() == ""){
             //检查规格是否为空
-            $spec.after("<span class='hightlight'>该项不能为空！</span>")
+            $spec_msg.html("该项不能为空！");
             flag = false;
         }
         if ($price.val() == "") {
             //检查价格是否为空
-            $price_msg.html("元，该项不能为空");
+            $price_msg.html("元，该项不能为空！");
             flag = false;
         }
 
