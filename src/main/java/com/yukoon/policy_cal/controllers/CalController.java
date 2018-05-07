@@ -1,5 +1,6 @@
 package com.yukoon.policy_cal.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yukoon.policy_cal.entities.*;
 import com.yukoon.policy_cal.services.CalService;
 import com.yukoon.policy_cal.services.GoodsService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +27,6 @@ public class CalController {
 
     @GetMapping("/cal")
     public String toCal(Map<String,Object> map) {
-
         List<Goods> goodlist = goodsService.getGoods();
         map.put("goods",goodlist);
         return "calculator";
@@ -66,10 +67,9 @@ public class CalController {
         return "result";
     }
 
-
+    @ResponseBody
     @GetMapping("/goods_detail")
-    public String goodsDetail() {
-
-        return  null;
+    public String goodsDetail(@RequestParam String id) throws JsonProcessingException {
+        return  goodsService.getGoodDetail(id);
     }
 }

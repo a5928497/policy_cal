@@ -1,5 +1,8 @@
 package com.yukoon.policy_cal.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yukoon.policy_cal.entities.Good;
 import com.yukoon.policy_cal.entities.Goods;
 import com.yukoon.policy_cal.entities.Page;
 import com.yukoon.policy_cal.utils.GoodsUtil;
@@ -21,5 +24,23 @@ public class GoodsService {
             }
         }
         return goodlist;
+    }
+
+    public String getGoodDetail(String id) throws JsonProcessingException {
+        Page page = GoodsUtil.getData();
+        Good good = new Good();
+        //遍历查找对应的商品
+        for (Goods goods:page.getDatas()) {
+            if (goods.getId().equals(id)){
+                good.setId(Integer.parseInt(goods.getId()));
+                good.setPrice(Float.parseFloat(goods.getSellingPrice().toString()));
+                good.setSpec(goods.getSpec());
+            }
+        }
+
+        //使用Jackson转JSON
+        ObjectMapper mapper = new ObjectMapper();
+        String userJSON = mapper.writeValueAsString(good);
+        return userJSON;
     }
 }
