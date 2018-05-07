@@ -2,7 +2,7 @@ $(function () {
     var $isSingle =  $("#isSingle");
     var $pd_amount = $("#pd_amount");
     var $amount_num = $("#amount_num");
-    var $std = $("#std_container");
+    var $s_std = $("#s_std_container");
     var $MorP = $(".MorP");
     var $add_BTN = $("#add_policy");
     var $plc_container = $("#plc_container");
@@ -15,6 +15,11 @@ $(function () {
     $pd_amount.hide();
     $heightlight.css("color","red").css("font-weight","900");
     $multi_form.hide();
+
+    //切换商品时，自动填入对应信息
+    $s_std.on("change","select",function () {
+
+    })
 
     //点击添加策略按钮，新增一行策略
     $add_BTN.click(function () {
