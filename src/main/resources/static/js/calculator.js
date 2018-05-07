@@ -11,6 +11,9 @@ $(function () {
     var $heightlight = $(".hightlight");
     var $multi_form = $("#multi_product");
     var $single_form = $("#single_product");
+    var $goods = $("#goods");
+    var $spec = $("#spec");
+    var $price = $("#price");
     //初始化页面
     $pd_amount.hide();
     $heightlight.css("color","red").css("font-weight","900");
@@ -18,7 +21,19 @@ $(function () {
 
     //切换商品时，自动填入对应信息
     $s_std.on("change","select",function () {
+        var id = $goods.find("option:selected").val();
+        //通过传入ID获得商品信息
+        $.get("/goods_detail",{id:id },function (data) {
+            //解析JSON
+            var jsondata = $.parseJSON(data);
+            var spec = jsondata.spec;
+            var price = jsondata.price;
+            price = price/spec;
+            //填入数值
+            $spec.val(spec);
+            $price.val(price);
 
+        })
     })
 
     //点击添加策略按钮，新增一行策略

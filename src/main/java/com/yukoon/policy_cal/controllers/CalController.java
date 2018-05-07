@@ -70,6 +70,7 @@ public class CalController {
     @ResponseBody
     @GetMapping("/goods_detail")
     public String goodsDetail(@RequestParam String id) throws JsonProcessingException {
+
         return  goodsService.getGoodDetail(id);
     }
 }

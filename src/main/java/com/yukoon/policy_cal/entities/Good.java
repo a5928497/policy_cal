@@ -28,4 +28,13 @@ public class Good {
     public void setPrice(float price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Good{" +
+                "id=" + id +
+                ", spec=" + spec +
+                ", price=" + price +
+                '}';
+    }
 }
