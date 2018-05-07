@@ -2,6 +2,7 @@ package com.yukoon.policy_cal.controllers;
 
 import com.yukoon.policy_cal.entities.*;
 import com.yukoon.policy_cal.services.CalService;
+import com.yukoon.policy_cal.services.GoodsService;
 import com.yukoon.policy_cal.utils.GoodsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,17 +20,13 @@ public class CalController {
 
     @Autowired
     private CalService calService;
+    @Autowired
+    private GoodsService goodsService;
 
     @GetMapping("/cal")
     public String toCal(Map<String,Object> map) {
-        Page page = GoodsUtil.getData();
-        List<Goods> goodlist = new ArrayList<>();
-        for (Goods goods : page.getDatas()) {
-            //商品名去重
-            if (goods.getSpec() != 1) {
-                goodlist.add(goods);
-            }
-        }
+
+        List<Goods> goodlist = goodsService.getGoods();
         map.put("goods",goodlist);
         return "calculator";
     }
@@ -69,4 +66,10 @@ public class CalController {
         return "result";
     }
 
+
+    @GetMapping("/goods_detail")
+    public String goodsDetail() {
+
+        return  null;
+    }
 }
