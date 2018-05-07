@@ -29,6 +29,10 @@
         <!--单一商品计算-->
         <!--商品参数容器-->
         <div id="s_std_container">
+            <label>商品名称：</label>
+            <select id="goods" name="goods" >
+                <option th:each="good:${goods}" th:value="${good.id}" th:text="${good.spell}"></option>
+            </select><br>
             <label>商品规格：1*</label><input type='text' size='1' id="spec" name="spec">
             <span id="spec_msg" class="hightlight"></span><br>
             <label>产品价格（单支）：</label><input type="text" size="2" id="price" name="price">

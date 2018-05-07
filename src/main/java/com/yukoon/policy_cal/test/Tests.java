@@ -21,7 +21,8 @@ public class Tests {
     public static void main(String[] args) throws Exception {
         Page result = new Tests().getData();
         for (Goods goods : result.getDatas()) {
-            System.out.println(goods.getSpell());
+                System.out.println(goods.getSpec());
+
         }
         System.out.print(result);
     }
@@ -82,6 +83,17 @@ public class Tests {
 
         public void setSellingPrice(BigDecimal sellingPrice) {
             this.sellingPrice = sellingPrice;
+        }
+
+        @Override
+        public String toString() {
+            return "Goods{" +
+                    "id='" + id + '\'' +
+                    ", spell='" + spell + '\'' +
+                    ", units='" + units + '\'' +
+                    ", spec=" + spec +
+                    ", sellingPrice=" + sellingPrice +
+                    '}';
         }
     }
 

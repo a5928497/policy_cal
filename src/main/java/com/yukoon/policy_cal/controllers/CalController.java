@@ -1,10 +1,8 @@
 package com.yukoon.policy_cal.controllers;
 
-import com.yukoon.policy_cal.entities.MPolicy;
-import com.yukoon.policy_cal.entities.PPolicy;
-import com.yukoon.policy_cal.entities.Policy;
-import com.yukoon.policy_cal.entities.Product;
+import com.yukoon.policy_cal.entities.*;
 import com.yukoon.policy_cal.services.CalService;
+import com.yukoon.policy_cal.utils.GoodsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,11 +21,20 @@ public class CalController {
     private CalService calService;
 
     @GetMapping("/cal")
-    public String toCal() {
+    public String toCal(Map<String,Object> map) {
+        Page page = GoodsUtil.getData();
+        List<Goods> goodlist = new ArrayList<>();
+        for (Goods goods : page.getDatas()) {
+            //商品名去重
+            if (goods.getSpec() != 1) {
+                goodlist.add(goods);
+            }
+        }
+        map.put("goods",goodlist);
         return "calculator";
     }
 
-@PostMapping("/single")
+    @PostMapping("/single")
     public String calSingle(HttpServletRequest request, Product product, Map<String,Object> map) {
         //策略数
         int plc_num = Integer.parseInt(request.getParameter("plc_num"));
@@ -61,4 +68,5 @@ public class CalController {
         map.put("results",calService.singleProduct(product));
         return "result";
     }
+
 }
