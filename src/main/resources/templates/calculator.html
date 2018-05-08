@@ -19,8 +19,31 @@
         <!--混合商品计算-->
         <span id="pd_amount"><lable>商品数量</lable><input id="amount_num" type="text" size="1" th:value="1"></span>
         <br>
-        <div id="std_container">
+        <div id="m_std_container">
             <label>商品规格：1*</label><input type='text' size='1'><br>
+        </div>
+        <div class="con_container">
+            <label>条件1：</label>
+            <select class="con" name="con1">
+                <option value="1">且</option>
+                <option value="0">或</option>
+            </select>
+            <select class="con" name="con1">
+                <option value="1">短白兰地</option>
+                <option value="0">或</option>
+            </select>
+            <select class="con" name="con1">
+                <option value="0">数量</option>
+                <option value="1">单价</option>
+                <option value="2">小计</option>
+            </select>
+            <select class="con" name="con1">
+                <option value="0">大于等于</option>
+                <option value="1">大于</option>
+                <option value="2">小于等于</option>
+                <option value="2">小于</option>
+                <option value="2">等于</option>
+            </select>
         </div>
         <input type="submit" value="计算">
     </form>
