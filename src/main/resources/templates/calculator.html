@@ -18,8 +18,8 @@
 <form id="multi_product" method="post">
     <!--混合商品计算-->
     <div id="products_container">
-        <div class="product" id="pd1">
-            <select>
+        <div class="product" >
+            <select id="pd1">
                 <option th:each="good:${goods}" th:value="${good.id}" th:text="${good.spell}"></option>
             </select>
             <label>1*</label><input type='text' size='1'><br>

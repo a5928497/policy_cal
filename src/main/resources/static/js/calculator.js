@@ -18,6 +18,7 @@ $(function () {
     var $good_selected = $goods.find("option:selected");
     var $add_pd_BTN = $("#add_pd_BTN");
     var $products_container = $("#products_container");
+    var m_count =2;
     //初始化页面信息
     $pd_amount.hide();
     $heightlight.css("color","red").css("font-weight","900");
@@ -26,13 +27,23 @@ $(function () {
 
     //点击添加商品按钮添加商品
     $add_pd_BTN.click(function () {
+        $products_container.append("        <div class=\"product\">\n" +
+            "            <select id='pd"+m_count+"'>\n" +
+            "            </select>\n" +
+            "            <label>1*</label><input type='text' size='1'><br>\n" +
+            "        </div>");
         $.get("goods_json",function (data) {
             //获取商品ID和商品名的JSON字符串并转为JSON对象
             var jsondata=eval("("+data+")");
+            var pd = "#pd" + m_count;
             $.each(jsondata.goods,function (i,n) {
-               console.log(n.spell);
+                console.log(pd)
+               $(pd).append("<option value=\""+n.id+"\" >"+n.spell+"</option>");
             });
+            //计数加1
+            m_count = m_count+1;
         });
+
         return false;
     });
 
