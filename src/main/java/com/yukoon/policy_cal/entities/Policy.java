@@ -1,30 +1,16 @@
 package com.yukoon.policy_cal.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Accessors(chain = true)
 public class Policy {
     private int id;
     private int pBox;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getpBox() {
-        return pBox;
-    }
-
-    public void setpBox(int pBox) {
-        this.pBox = pBox;
-    }
-
-    @Override
-    public String toString() {
-        return "Policy{" +
-                "id=" + id +
-                ", pBox=" + pBox +
-                '}';
-    }
 }
