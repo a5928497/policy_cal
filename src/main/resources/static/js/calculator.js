@@ -16,12 +16,19 @@ $(function () {
     var $price = $("#price");
     var $good_name  = $("#good_name");
     var $good_selected = $goods.find("option:selected");
+    var $add_pd_BTN = $("#add_pd_BTN");
+    var $products_container = $("#products_container");
     //初始化页面信息
     $pd_amount.hide();
     $heightlight.css("color","red").css("font-weight","900");
     $multi_form.hide();
     $good_name.val($good_selected.html());
 
+    //点击添加商品按钮添加商品
+    $add_pd_BTN.click(function () {
+
+        return false;
+    });
 
     //切换商品时，自动填入对应信息
     $s_std.on("change","select",function () {
@@ -109,17 +116,17 @@ $(function () {
             $pd_amount.hide();
             $single_form.show();
             $amount_num.val("1")
-            $std.empty();
-            $std.append(" <label>商品规格：1*</label><input type=\'text\' size=\'1\'><br>");
+            $s_std.empty();
+            $s_std.append(" <label>商品规格：1*</label><input type=\'text\' size=\'1\'><br>");
         }
    });
 
     //根据商品数目添加商品规格
     $amount_num.change(function () {
         var times = parseInt($(this).val());
-        $std.empty();
+        $s_std.empty();
         for (var i = 0;i<times;i++){
-            $std.append(" <label>商品规格：1*</label><input type=\'text\' size=\'1\'><br>");
+            $s_std.append(" <label>商品规格：1*</label><input type=\'text\' size=\'1\'><br>");
         }
     });
 

@@ -7,88 +7,92 @@
 </head>
 <body>
 
-    <h1>政策计算器</h1>
-    <!--选择单个或多个商品进行计算-->
-    <label>计算参数</label>
-    <select id="isSingle" name="isSingle">
-        <option value="1">单一商品</option>
-        <option value="0">多个商品</option>
-    </select>
+<h1>政策计算器</h1>
+<!--选择单个或多个商品进行计算-->
+<label>计算参数</label>
+<select id="isSingle" name="isSingle">
+    <option value="1">单一商品</option>
+    <option value="0">多个商品</option>
+</select>
 
-    <form id="multi_product" method="post">
-        <!--混合商品计算-->
-        <span id="pd_amount"><lable>商品数量</lable><input id="amount_num" type="text" size="1" th:value="1"></span>
-        <br>
-        <div id="m_std_container">
-            <label>商品规格：1*</label><input type='text' size='1'><br>
-        </div>
-        <div class="con_container">
-            <label>条件1：</label>
-            <select class="con" name="con1">
-                <option value="1">且</option>
-                <option value="0">或</option>
-            </select>
-            <select class="con" name="con1">
-                <option value="1">短白兰地</option>
-                <option value="0">或</option>
-            </select>
-            <select class="con" name="con1">
-                <option value="0">数量</option>
-                <option value="1">单价</option>
-                <option value="2">小计</option>
-            </select>
-            <select class="con" name="con1">
-                <option value="0">大于等于</option>
-                <option value="1">大于</option>
-                <option value="2">小于等于</option>
-                <option value="2">小于</option>
-                <option value="2">等于</option>
-            </select>
-        </div>
-        <input type="submit" value="计算">
-    </form>
-
-    <form id="single_product" method="post" action="/single">
-        <!--单一商品计算-->
-        <!--商品参数容器-->
-        <div id="s_std_container">
-            <label>商品名称：</label>
-            <select id="goods" name="goods" >
+<form id="multi_product" method="post">
+    <!--混合商品计算-->
+    <div id="products_container">
+        <div class="product" id="pd1">
+            <select>
                 <option th:each="good:${goods}" th:value="${good.id}" th:text="${good.spell}"></option>
             </select>
-            <input type="hidden" id="good_name" name="good_name" value=""><br>
-            <label>商品规格：1*</label><input type='text' size='1' id="spec" name="spec">
-            <span id="spec_msg" class="hightlight"></span><br>
-            <label>产品价格（单支）：</label><input type="text" size="2" id="price" name="price">
-            <span id="price_msg" class="hightlight">元</span><br>
-            <label>生效数量：</label>大于等于<input type="text" size="2" id="min" name="min">
-            <span class="hightlight" id="min_msg">支</span><br>
-            小于（没有则填0）<input type="text" size="2" name="max" id="max" value="0">
-            <span class="hightlight" id="max_msg">支</span>
+            <label>1*</label><input type='text' size='1'><br>
         </div>
-        <!--添加策略按钮-->
-        <button id="add_policy">添加策略</button>
-        <!--策略数-->
-        <input type="hidden" id="plc_num" name="plc_num" value="1">
-        <!--赠送策略容器-->
-        <div id="plc_container">
-            <div id="plc1">
+    </div>
+    <button id="add_pd_BTN">增加商品</button>
+    <div class="con_container">
+        <label>条件1：</label>
+        <select class="con" name="con1">
+            <option value="1">且</option>
+            <option value="0">或</option>
+        </select>
+        <select class="con" name="con1">
+            <option value="1">短白兰地</option>
+            <option value="0">或</option>
+        </select>
+        <select class="con" name="con1">
+            <option value="0">数量</option>
+            <option value="1">单价</option>
+            <option value="2">小计</option>
+        </select>
+        <select class="con" name="con1">
+            <option value="0">大于等于</option>
+            <option value="1">大于</option>
+            <option value="2">小于等于</option>
+            <option value="2">小于</option>
+            <option value="2">等于</option>
+        </select>
+    </div>
+    <input type="submit" value="计算">
+</form>
+
+<form id="single_product" method="post" action="/single">
+    <!--单一商品计算-->
+    <!--商品参数容器-->
+    <div id="s_std_container">
+        <label>商品名称：</label>
+        <select id="goods" name="goods">
+            <option th:each="good:${goods}" th:value="${good.id}" th:text="${good.spell}"></option>
+        </select>
+        <input type="hidden" id="good_name" name="good_name" value=""><br>
+        <label>商品规格：1*</label><input type='text' size='1' id="spec" name="spec">
+        <span id="spec_msg" class="hightlight"></span><br>
+        <label>产品价格（单支）：</label><input type="text" size="2" id="price" name="price">
+        <span id="price_msg" class="hightlight">元</span><br>
+        <label>生效数量：</label>大于等于<input type="text" size="2" id="min" name="min">
+        <span class="hightlight" id="min_msg">支</span><br>
+        小于（没有则填0）<input type="text" size="2" name="max" id="max" value="0">
+        <span class="hightlight" id="max_msg">支</span>
+    </div>
+    <!--添加策略按钮-->
+    <button id="add_policy">添加策略</button>
+    <!--策略数-->
+    <input type="hidden" id="plc_num" name="plc_num" value="1">
+    <!--赠送策略容器-->
+    <div id="plc_container">
+        <div id="plc1">
             <label>策略1：</label>
             <select class="MorP" name="MorP1">
                 <option value="1">赠送商品</option>
                 <option value="0">减免金额</option>
             </select>
-            <span  id="plc1_text">
+            <span id="plc1_text">
                 满<input type="text" size="1" name="p_box1">箱送
                 <input type="text" size="1" name="box1">箱+
                 <input type="text" size="1" name="bottle1" value="0">支
             </span>
-            </div>
         </div>
-        <button id="single_cmt_BTN">计算</button>
-    </form>
-    <script type="text/javascript" src="" th:src="@{/webjars/jquery/1.11.1/jquery.js}"></script>
-    <script type="text/javascript" src="js/calculator.js" th:src="@{/js/calculator.js}"></script>
-    <script type="text/javascript" src="js/calculator.js" th:src="@{/js/calculator_validate.js}"></script>
+    </div>
+    <button id="single_cmt_BTN">计算</button>
+</form>
+<script type="text/javascript" src="" th:src="@{/webjars/jquery/1.11.1/jquery.js}"></script>
+<script type="text/javascript" src="js/calculator.js" th:src="@{/js/calculator.js}"></script>
+<script type="text/javascript" src="js/calculator.js" th:src="@{/js/calculator_validate.js}"></script>
 </body>
 </html>
