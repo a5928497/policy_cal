@@ -15,29 +15,18 @@ $(function () {
     var $spec = $("#spec");
     var $price = $("#price");
     var $good_name  = $("#good_name");
-    //初始化页面
+    var $good_selected = $goods.find("option:selected");
+    //初始化页面信息
     $pd_amount.hide();
     $heightlight.css("color","red").css("font-weight","900");
     $multi_form.hide();
-    $good_name.val($goods.find("option:selected").html());
+    $good_name.val($good_selected.html());
+
 
     //切换商品时，自动填入对应信息
     $s_std.on("change","select",function () {
-        var id = $goods.find("option:selected").val();
-        var good_name = $goods.find("option:selected").html();
-        //通过传入ID获得商品信息
-        $.get("/goods_detail",{id:id },function (data) {
-            //解析JSON
-            var jsondata = $.parseJSON(data);
-            var spec = jsondata.spec;
-            var price = jsondata.price;
-            price = price/spec;
-            //填入数值
-            $spec.val(spec);
-            $price.val(price);
-            $good_name.val(good_name);
-        })
-    })
+        $(this).get_detail();
+    });
 
     //点击添加策略按钮，新增一行策略
     $add_BTN.click(function () {
@@ -65,7 +54,7 @@ $(function () {
         // char_code=char_code+1;
         count=count+1;
         return false;
-    })
+    });
 
     //点击删除按钮删除当前策略行，使用时间委派
     $plc_container.on("click",".del_plc_BTN",function () {
@@ -81,7 +70,7 @@ $(function () {
         //更新策略数目
         $plc_num.attr("value",(count-1));
         return false;
-    })
+    });
 
     //选择赠送则显示送，选择减钱则显示减，使用事件委派
     //选赠送显示商品、减钱显示元
@@ -105,7 +94,7 @@ $(function () {
                     "            <input type=\'text\' size=\'1\' name=\'box"+plc_num+"\'>箱+\n" +
                     "            <input type=\"text\" value=\'0\' size=\"1\" name=\'bottle"+plc_num+"\'>支");
         }
-    })
+    });
 
     //选择多个商品时显示数目
     $isSingle.change(function () {
@@ -123,7 +112,7 @@ $(function () {
             $std.empty();
             $std.append(" <label>商品规格：1*</label><input type=\'text\' size=\'1\'><br>");
         }
-   })
+   });
 
     //根据商品数目添加商品规格
     $amount_num.change(function () {
@@ -132,5 +121,25 @@ $(function () {
         for (var i = 0;i<times;i++){
             $std.append(" <label>商品规格：1*</label><input type=\'text\' size=\'1\'><br>");
         }
-    })
-})
+    });
+
+    //商品详情函数
+    $.fn.get_detail=function () {
+        var id = $goods.find("option:selected").val();
+        var good_name = $goods.find("option:selected").html();
+        //通过传入ID获得商品信息
+        $.get("/goods_detail",{id:id },function (data) {
+            //解析JSON
+            var jsondata = $.parseJSON(data);
+            var spec = jsondata.spec;
+            var price = jsondata.price;
+            price = price/spec;
+            //填入数值
+            $spec.val(spec);
+            $price.val(price);
+            $good_name.val(good_name);
+        });
+    }
+    //初始化页面信息
+    $(this).get_detail();
+});
