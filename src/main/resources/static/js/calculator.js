@@ -25,25 +25,40 @@ $(function () {
     $multi_form.hide();
     $good_name.val($good_selected.html());
 
+    //点击删除按钮删除当前商品行，使用时间委派
+    $products_container.on("click",".del_pd_BTN",function () {
+       $(this).parent().remove();
+       m_count = m_count-1;
+        if(m_count>1){
+            var prev_del_btn = "#del_pd_BTN"+ (m_count-1);
+            $(prev_del_btn).show();
+        }
+       return false;
+    });
+
     //点击添加商品按钮添加商品
     $add_pd_BTN.click(function () {
-        $products_container.append("        <div class=\"product\">\n" +
+        $products_container.append("        <div class=\"product\" >\n" +
             "            <select id='pd"+m_count+"'>\n" +
             "            </select>\n" +
-            "            <label>1*</label><input type='text' size='1'><br>\n" +
+            "            <label>1*</label><input type='text' size='1'>\n" +
+            "            <button class='del_pd_BTN' id='del_pd_BTN"+m_count+"'>删除</button><br>"+
             "        </div>");
         $.get("goods_json",function (data) {
             //获取商品ID和商品名的JSON字符串并转为JSON对象
             var jsondata=eval("("+data+")");
             var pd = "#pd" + m_count;
             $.each(jsondata.goods,function (i,n) {
-                console.log(pd)
                $(pd).append("<option value=\""+n.id+"\" >"+n.spell+"</option>");
             });
             //计数加1
             m_count = m_count+1;
         });
-
+        //隐藏上一个删除按钮
+        if(m_count>2){
+            var prev_del_btn = "#del_pd_BTN"+ (m_count-1);
+            $(prev_del_btn).hide();
+        }
         return false;
     });
 
