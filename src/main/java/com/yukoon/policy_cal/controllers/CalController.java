@@ -72,4 +72,10 @@ public class CalController {
 
         return  goodsService.getGoodDetail(id);
     }
+
+    @ResponseBody
+    @GetMapping("/goods_json")
+    public String goodsJSON(){
+        return  goodsService.getGoodsJSON();
+    }
 }

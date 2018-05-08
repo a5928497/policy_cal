@@ -14,6 +14,7 @@ import java.util.List;
 @Service
 public class GoodsService {
 
+    //返回商品list
     public List<Goods> getGoods(){
         Page page = GoodsUtil.getData();
         List<Goods> goodlist = new ArrayList<>();
@@ -24,6 +25,26 @@ public class GoodsService {
             }
         }
         return goodlist;
+    }
+
+    //返回商品JSON
+    public String getGoodsJSON() {
+        Page page = GoodsUtil.getData();
+        List<Goods> goodlist = new ArrayList<>();
+        StringBuffer json = new StringBuffer("{goods:[");
+        int count = 1;
+        for (Goods goods : page.getDatas()) {
+            //商品名去重
+            if (goods.getSpec() != 1) {
+                json.append("{id:\'" +goods.getId() + "\'," );
+                json.append("spell:\'"+goods.getSpell() + "\'},");
+                count++;
+            }
+        }
+        //去除最后一个逗号
+        json.deleteCharAt(json.length()-1);
+        json.append("]}");
+        return json.toString();
     }
 
     public String getGoodDetail(String id) throws JsonProcessingException {

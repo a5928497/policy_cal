@@ -26,7 +26,13 @@ $(function () {
 
     //点击添加商品按钮添加商品
     $add_pd_BTN.click(function () {
-
+        $.get("goods_json",function (data) {
+            //获取商品ID和商品名的JSON字符串并转为JSON对象
+            var jsondata=eval("("+data+")");
+            $.each(jsondata.goods,function (i,n) {
+               console.log(n.spell);
+            });
+        });
         return false;
     });
 
