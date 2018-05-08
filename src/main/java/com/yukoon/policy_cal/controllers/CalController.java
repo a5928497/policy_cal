@@ -36,7 +36,6 @@ public class CalController {
     public String calSingle(HttpServletRequest request, Product product, Map<String,Object> map) {
         //策略数
         int plc_num = Integer.parseInt(request.getParameter("plc_num"));
-
         List<Policy> list = new ArrayList<>();
         //获取策略
         for (int i=1;i<=plc_num;i++){

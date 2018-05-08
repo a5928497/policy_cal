@@ -14,14 +14,17 @@ $(function () {
     var $goods = $("#goods");
     var $spec = $("#spec");
     var $price = $("#price");
+    var $good_name  = $("#good_name");
     //初始化页面
     $pd_amount.hide();
     $heightlight.css("color","red").css("font-weight","900");
     $multi_form.hide();
+    $good_name.val($goods.find("option:selected").html());
 
     //切换商品时，自动填入对应信息
     $s_std.on("change","select",function () {
         var id = $goods.find("option:selected").val();
+        var good_name = $goods.find("option:selected").html();
         //通过传入ID获得商品信息
         $.get("/goods_detail",{id:id },function (data) {
             //解析JSON
@@ -32,7 +35,7 @@ $(function () {
             //填入数值
             $spec.val(spec);
             $price.val(price);
-
+            $good_name.val(good_name);
         })
     })
 

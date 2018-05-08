@@ -16,7 +16,9 @@ public class CalService {
         for (int i = 0;i<list.size();i++){
             Policy policy = list.get(i);
             //满X字段
-            int pBox = policy.getpBox();;
+            int pBox = policy.getpBox();
+            //商品名字段
+            String name = product.getGood_name();
             //规格字段
             int spec = product.getSpec();
             //价格字段
@@ -31,10 +33,10 @@ public class CalService {
             String condition;
             if (max == 0) {
                 //无上限时
-                condition  = "价格 >= " + price + " && 数量 >= " + min;
+                condition  = name+"价格 >= " + price + " && "+name+"数量 >= " + min;
             }else {
                 //有上限时
-                condition  = "价格 >= " + price + " && 数量 >= " + min +" && 数量 < " + max;
+                condition  = name+"价格 >= " + price + " && "+name+"数量 >= " + min +" && "+name+"数量 < " + max;
             }
             result.setCondition(condition);
             //判断是否减钱
@@ -42,9 +44,9 @@ public class CalService {
                 //生成策略
                 String strategy;
                 if(pBox != 1){
-                    strategy = "Floor(数量 / (" + spec + " * "+ pBox +" ) * " +  ((MPolicy) policy).getMoney();
+                    strategy = "Floor("+name+"数量 / (" + spec + " * "+ pBox +" ) * " +  ((MPolicy) policy).getMoney();
                 }else {
-                    strategy = "Floor(数量 / " + spec + " ) * " +  ((MPolicy) policy).getMoney();
+                    strategy = "Floor("+name+"数量 / " + spec + " ) * " +  ((MPolicy) policy).getMoney();
                 }
                 result.setStrategy1(strategy);
                 result.setStrategy2("---本策略为金额减免策略--");
@@ -60,7 +62,7 @@ public class CalService {
                 String strategy2 = null;
                 if (bottle == 0){
                     //整箱赠送，公式=满X箱赠送Y箱
-                    strategy1 = "Floor(数量 / "+ (spec*pBox) + " ) * " + ((PPolicy) policy).getBox();
+                    strategy1 = "Floor("+name+"数量 / "+ (spec*pBox) + " ) * " + ((PPolicy) policy).getBox();
                     strategy2 = "不需要设置单支策略";
                 }else {
                         //非整箱赠送，公式=满X箱赠送Y箱+Z支
@@ -72,9 +74,9 @@ public class CalService {
                         int chang_times = (int)Math.ceil(spec/bottle);
                         int amount = spec * pBox;
                         //BOX = Floor(数量/amount)*box + Floor(数量/(amount*change_times))
-                        strategy1 = "(Floor(数量/" + amount + ")*" +box + ")+ (Floor(数量/(" + amount + "*" + chang_times + ")))";
+                        strategy1 = "(Floor("+name+"数量/" + amount + ")*" +box + ")+ (Floor("+name+"数量/(" + amount + "*" + chang_times + ")))";
                         //Bottle = Floor(数量/amount) * bottle - Floor(数量/amount*change_times)*spec
-                        strategy2 = "(Floor(数量/" + amount + ") * " + bottle + ")- (Floor(数量/(" + amount + "*" + chang_times +
+                        strategy2 = "(Floor("+name+"数量/" + amount + ") * " + bottle + ")- (Floor("+name+"数量/(" + amount + "*" + chang_times +
                                 ")) * " + spec + ")";
                 }
                 result.setStrategy1(strategy1);

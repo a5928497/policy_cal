@@ -3,6 +3,7 @@ package com.yukoon.policy_cal.entities;
 import java.util.List;
 
 public class Product {
+    private String good_name;
     private int spec;
     private float price;
     private int min;
@@ -51,10 +52,19 @@ public class Product {
         this.max = max;
     }
 
+    public String getGood_name() {
+        return good_name;
+    }
+
+    public void setGood_name(String good_name) {
+        this.good_name = good_name;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
-                "spec=" + spec +
+                "good_name='" + good_name + '\'' +
+                ", spec=" + spec +
                 ", price=" + price +
                 ", min=" + min +
                 ", max=" + max +

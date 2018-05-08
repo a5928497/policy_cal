@@ -32,7 +32,8 @@
             <label>商品名称：</label>
             <select id="goods" name="goods" >
                 <option th:each="good:${goods}" th:value="${good.id}" th:text="${good.spell}"></option>
-            </select><br>
+            </select>
+            <input type="hidden" id="good_name" name="good_name" value=""><br>
             <label>商品规格：1*</label><input type='text' size='1' id="spec" name="spec">
             <span id="spec_msg" class="hightlight"></span><br>
             <label>产品价格（单支）：</label><input type="text" size="2" id="price" name="price">
