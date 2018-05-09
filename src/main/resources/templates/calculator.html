@@ -22,7 +22,8 @@
             <select id="pd1">
                 <option th:each="good:${goods}" th:value="${good.id}" th:text="${good.spell}"></option>
             </select>
-            <label>1*</label><input type='text' size='1'><br>
+            <label>1*</label><input type='text' size='1'id="spec1">
+            <label>单支价格</label><input type='text' size='1' id="price1"><br>
         </div>
     </div>
     <button id="add_pd_BTN">增加商品</button>
@@ -91,6 +92,7 @@
     </div>
     <button id="single_cmt_BTN">计算</button>
 </form>
+
 <script type="text/javascript" src="" th:src="@{/webjars/jquery/1.11.1/jquery.js}"></script>
 <script type="text/javascript" src="js/calculator.js" th:src="@{/js/calculator.js}"></script>
 <script type="text/javascript" src="js/calculator.js" th:src="@{/js/calculator_validate.js}"></script>

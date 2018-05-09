@@ -19,6 +19,9 @@ $(function () {
     var $add_pd_BTN = $("#add_pd_BTN");
     var $products_container = $("#products_container");
     var m_count =2;
+    var $pd1 = $("#pd1");
+    var $spec1 = $("#spec1");
+    var $price1 = $("#price1");
     //初始化页面信息
     $pd_amount.hide();
     $heightlight.css("color","red").css("font-weight","900");
@@ -41,8 +44,9 @@ $(function () {
         $products_container.append("        <div class=\"product\" >\n" +
             "            <select id='pd"+m_count+"'>\n" +
             "            </select>\n" +
-            "            <label>1*</label><input type='text' size='1'>\n" +
-            "            <button class='del_pd_BTN' id='del_pd_BTN"+m_count+"'>删除</button><br>"+
+            "            <label>1*</label><input type='text' size='1' id='spec"+m_count+"'>\n" +
+            "            <label>单支价格</label><input type='text' size='1' id='price"+m_count+"'>"+
+            "            <button class='del_pd_BTN' id='del_pd_BTN"+m_count+"'>删除</button>"+
             "        </div>");
         $.get("goods_json",function (data) {
             //获取商品ID和商品名的JSON字符串并转为JSON对象
@@ -52,19 +56,23 @@ $(function () {
                $(pd).append("<option value=\""+n.id+"\" >"+n.spell+"</option>");
             });
             //计数加1
+            var $this_select  = $("#pd"+(m_count));
+            $(this).get_detail($this_select,$("#spec"+(m_count)),$("#price"+(m_count)));
             m_count = m_count+1;
+
         });
         //隐藏上一个删除按钮
         if(m_count>2){
             var prev_del_btn = "#del_pd_BTN"+ (m_count-1);
             $(prev_del_btn).hide();
         }
+
         return false;
     });
 
     //切换商品时，自动填入对应信息
     $s_std.on("change","select",function () {
-        $(this).get_detail($goods);
+        $(this).get_detail($goods,$spec,$price);
     });
 
     //点击添加策略按钮，新增一行策略
@@ -142,6 +150,7 @@ $(function () {
             $multi_form.show();
             $single_form.hide();
             $pd_amount.show();
+            $(this).get_detail($pd1,$spec1,$price1);
         }
         if ($opt_select == "1") {
             $multi_form.hide();
@@ -161,7 +170,7 @@ $(function () {
     });
 
     //商品详情函数
-    $.fn.get_detail=function (JqObj) {
+    $.fn.get_detail=function (JqObj,specN,priceN) {
         var id = JqObj.find("option:selected").val();
         var good_name = JqObj.find("option:selected").html();
         //通过传入ID获得商品信息
@@ -172,13 +181,13 @@ $(function () {
             var price = jsondata.price;
             price = price/spec;
             //填入数值
-            $spec.val(spec);
-            $price.val(price);
+            specN.val(spec);
+            priceN.val(price);
             $good_name.val(good_name);
         });
     }
 
     //初始化页面信息
-    $(this).get_detail($goods);
+    $(this).get_detail($goods,$spec,$price);
 
 });
