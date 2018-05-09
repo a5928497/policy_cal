@@ -40,7 +40,7 @@ $(function () {
         return false;
     });
 
-    //点击确定商品按钮，锁定商品，同时商品下拉菜单不可用
+    //点击确定商品按钮，记录已选商品并去重，同时商品下拉菜单不可用
     $confirm_pd_BTN.click(function () {
         var $product_select  = $(".product").children();
         $product_select.attr("disabled","disabled");
