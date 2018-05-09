@@ -16,7 +16,7 @@ public class CalService {
         for (int i = 0;i<list.size();i++){
             Policy policy = list.get(i);
             //满X字段
-            int pBox = policy.getpBox();
+            int pBox = policy.getPBox();
             //商品名字段
             String name = product.getGood_name();
             //规格字段

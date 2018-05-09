@@ -64,7 +64,7 @@ $(function () {
 
     //切换商品时，自动填入对应信息
     $s_std.on("change","select",function () {
-        $(this).get_detail();
+        $(this).get_detail($goods);
     });
 
     //点击添加策略按钮，新增一行策略
@@ -147,9 +147,7 @@ $(function () {
             $multi_form.hide();
             $pd_amount.hide();
             $single_form.show();
-            $amount_num.val("1")
-            $s_std.empty();
-            $s_std.append(" <label>商品规格：1*</label><input type=\'text\' size=\'1\'><br>");
+            $amount_num.val("1");
         }
    });
 
@@ -163,9 +161,9 @@ $(function () {
     });
 
     //商品详情函数
-    $.fn.get_detail=function () {
-        var id = $goods.find("option:selected").val();
-        var good_name = $goods.find("option:selected").html();
+    $.fn.get_detail=function (JqObj) {
+        var id = JqObj.find("option:selected").val();
+        var good_name = JqObj.find("option:selected").html();
         //通过传入ID获得商品信息
         $.get("/goods_detail",{id:id },function (data) {
             //解析JSON
@@ -179,6 +177,8 @@ $(function () {
             $good_name.val(good_name);
         });
     }
+
     //初始化页面信息
-    $(this).get_detail();
+    $(this).get_detail($goods);
+
 });

@@ -44,7 +44,7 @@ public class CalController {
             if (MorP == 0){
                 MPolicy mPolicy = new MPolicy();
                 mPolicy.setId(i);
-                mPolicy.setpBox(Integer.parseInt(request.getParameter("p_box"+i)));
+                mPolicy.setPBox(Integer.parseInt(request.getParameter("p_box"+i)));
                 mPolicy.setMoney(Float.parseFloat(request.getParameter("money"+i)));
                 System.out.println(mPolicy.toString());
                 list.add(mPolicy);
@@ -53,7 +53,7 @@ public class CalController {
             if (MorP == 1) {
                 PPolicy pPolicy = new PPolicy();
                 pPolicy.setId(i);
-                pPolicy.setpBox(Integer.parseInt(request.getParameter("p_box"+i)));
+                pPolicy.setPBox(Integer.parseInt(request.getParameter("p_box"+i)));
                 pPolicy.setBox(Integer.parseInt(request.getParameter("box"+i)));
                 pPolicy.setBottle(Integer.parseInt(request.getParameter("bottle"+i)));
                 System.out.println(pPolicy.toString());
