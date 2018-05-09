@@ -22,13 +22,34 @@ $(function () {
     var $pd1 = $("#pd1");
     var $spec1 = $("#spec1");
     var $price1 = $("#price1");
+    var $confirm_pd_BTN = $("#confirm_pd_BTN");
+    var $cancle_pd_BTN = $("#cancle_pd_BTN");
+
     //初始化页面信息
     $pd_amount.hide();
     $heightlight.css("color","red").css("font-weight","900");
     $multi_form.hide();
     $good_name.val($good_selected.html());
 
-    //商品改变时，填入相应信息
+    //点击取消确认按钮，取消锁定商品，同时商品下拉菜单可用
+    $cancle_pd_BTN.click(function () {
+        var $product_select  = $(".product").children();
+        $product_select.removeAttr("disabled");
+        $confirm_pd_BTN.removeAttr("disabled");
+        $(this).attr("disabled","disabled");
+        return false;
+    });
+
+    //点击确定商品按钮，锁定商品，同时商品下拉菜单不可用
+    $confirm_pd_BTN.click(function () {
+        var $product_select  = $(".product").children();
+        $product_select.attr("disabled","disabled");
+        $cancle_pd_BTN.removeAttr("disabled");
+        $(this).attr("disabled","disabled");
+        return false;
+    });
+
+    //商品改变时，填入相应信息，使用事件委派
     $products_container.on("change","select",function () {
         //尾数最大999
        var num = $(this).attr("id").substring(2,5);
