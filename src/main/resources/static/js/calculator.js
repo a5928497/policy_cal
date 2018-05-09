@@ -28,7 +28,16 @@ $(function () {
     $multi_form.hide();
     $good_name.val($good_selected.html());
 
-    //点击删除按钮删除当前商品行，使用时间委派
+    //商品改变时，填入相应信息
+    $products_container.on("change","select",function () {
+        //尾数最大999
+       var num = $(this).attr("id").substring(2,5);
+       var $spec_temp = $("#spec" + num);
+       var $price_temp = $("#price"+num);
+       $(this).get_detail($(this),$spec_temp,$price_temp);
+    });
+
+    //点击删除按钮删除当前商品行，使用事件委派
     $products_container.on("click",".del_pd_BTN",function () {
        $(this).parent().remove();
        m_count = m_count-1;
@@ -103,7 +112,7 @@ $(function () {
         return false;
     });
 
-    //点击删除按钮删除当前策略行，使用时间委派
+    //点击删除按钮删除当前策略行，使用事件委派
     $plc_container.on("click",".del_plc_BTN",function () {
        $(this).parent().remove();
        count = count-1;
