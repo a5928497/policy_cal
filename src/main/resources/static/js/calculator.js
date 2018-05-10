@@ -25,7 +25,8 @@ $(function () {
     var $confirm_pd_BTN = $("#confirm_pd_BTN");
     var $cancle_pd_BTN = $("#cancle_pd_BTN");
     var $m_commit = $("#m_commit");
-    var $products_msg =$("#products_msg");
+    var $products_msg = $("#products_msg");
+    var $con_container  = $(".con_container");
 
     //初始化页面信息
     $pd_amount.hide();
@@ -33,6 +34,14 @@ $(function () {
     $multi_form.hide();
     $good_name.val($good_selected.html());
     $products_msg.hide();
+
+    //条件中若出现多个商品进行运算，则添加商品信息
+    $con_container.on("change",".math",function () {
+        //若该项不是选择无，添加条件
+        if ($(this).val() != 0 ){
+
+        }
+    });
 
     //点击取消确认按钮，取消锁定商品，同时商品下拉菜单可用，此按钮、计算按钮不可用，确认按钮可用
     $cancle_pd_BTN.click(function () {

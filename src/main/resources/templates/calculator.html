@@ -31,26 +31,37 @@
     <button id="confirm_pd_BTN">确认商品</button>
     <button id="cancle_pd_BTN" disabled="disabled">取消确认</button>
     <div class="con_container">
-        <label>条件1：</label>
-        <select class="con" id="status1" name="status1">
-            <option value="1">且</option>
-            <option value="0">或</option>
-        </select>
-        <select class="con" id="con_pd1_1" name="con_pd1_1">
-            <option value="1">--请先确认商品--</option>
-        </select>
-        <select class="con" id="con_std1_1" name="con_std1_1">
-            <option value="0">数量</option>
-            <option value="1">单价</option>
-            <option value="2">小计</option>
-        </select>
-        <select class="con" name="symbol1">
-            <option value="0">大于等于</option>
-            <option value="1">大于</option>
-            <option value="2">小于等于</option>
-            <option value="2">小于</option>
-            <option value="2">等于</option>
-        </select>
+        <div id="con1">
+            <label>条件1：</label>
+            <select id="status1" name="status1">
+                <option value="1">且</option>
+                <option value="0">或</option>
+            </select>
+            <select id="con_pd1_1" name="con_pd1_1">
+                <option value="1">--请先确认商品--</option>
+            </select>
+            <select id="con_std1_1" name="con_std1_1">
+                <option value="0">数量</option>
+                <option value="1">单价</option>
+                <option value="2">小计</option>
+            </select>
+            <select class="math" name="math1">
+                <option value="0">无</option>
+                <option value="1">+</option>
+                <option value="2">-</option>
+                <option value="3">*</option>
+                <option value="4">/(取整)</option>
+                <option value="5">/(四舍五入)</option>
+            </select>
+            <select name="symbol1">
+                <option value="0">大于等于</option>
+                <option value="1">大于</option>
+                <option value="2">小于等于</option>
+                <option value="3">小于</option>
+                <option value="4">等于</option>
+            </select>
+            <input type="text" size="2">
+        </div>
     </div>
     <input id="m_commit" type="submit" value="计算" disabled="disabled">
 </form>
