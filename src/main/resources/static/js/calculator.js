@@ -52,8 +52,8 @@ $(function () {
         $products_msg.hide();
         //创建数组
         var goods_array = new Array();
-        product_select.each(function (i) {
-           goods_array.push($(this).find("option:selected").html());
+        product_select.each(function () {
+           goods_array.push($(this).find("option:selected").val()+","+$(this).find("option:selected").html());
         });
         var temp_num  = goods_array.length;
         //去重
@@ -66,7 +66,10 @@ $(function () {
         $m_commit.removeAttr("disabled");
         $add_pd_BTN.attr("disabled","disabled");
         $(this).attr("disabled","disabled");
+        //调用fill_products()，将选中商品填入下文选项中
+        $(this).fill_products($("#con_pd1_1"),goods_array);
         }else {
+            //若商品重复，取消操作，提示信息
             $products_msg.html("商品存在重复！").show();
         }
         return false;
@@ -237,6 +240,17 @@ $(function () {
             specN.val(spec);
             priceN.val(price);
             $good_name.val(good_name);
+        });
+    }
+
+    //select填充商品函数
+    $.fn.fill_products = function (JqObj,array) {
+        JqObj.empty();
+        $.each(array,function (i,v) {
+            var temp_array = new Array();
+            temp_array = v.split(",");
+            JqObj.append("<option value=\""+temp_array[0]+"\">"+temp_array[1]+"</option>");
+
         });
     }
 
