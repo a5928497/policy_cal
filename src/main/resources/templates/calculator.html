@@ -26,6 +26,7 @@
             <label>单支价格</label><input type='text' size='1' id="price1"><br>
         </div>
     </div>
+    <div id="products_msg" class="hightlight"></div>
     <button id="add_pd_BTN">增加商品</button>
     <button id="confirm_pd_BTN">确认商品</button>
     <button id="cancle_pd_BTN" disabled="disabled">取消确认</button>
@@ -52,7 +53,7 @@
             <option value="2">等于</option>
         </select>
     </div>
-    <input type="submit" value="计算">
+    <input id="m_commit" type="submit" value="计算" disabled="disabled">
 </form>
 
 <form id="single_product" method="post" action="/single">
