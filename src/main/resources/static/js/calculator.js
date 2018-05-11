@@ -46,7 +46,8 @@ $(function () {
             var prefix = parseInt(tmp_array[0].substring(4,6));
             var suffix = parseInt(tmp_array[1]);
             next_symbol = "#" + next_symbol+(suffix +1);
-            console.log($(next_symbol).length)
+            console.log(next_symbol);
+            console.log($(next_symbol).length);
             if ($(next_symbol).length == 0){
                     suffix = suffix+1;
                 $(this).after("<select id=\"con_pd"+prefix+"_"+suffix+"\" name=\"con_pd"+prefix+"_"+suffix+"\">\n" +
@@ -57,7 +58,7 @@ $(function () {
                     "                <option value=\"1\">单价</option>\n" +
                     "                <option value=\"2\">小计</option>\n" +
                     "            </select>\n" +
-                    "            <select class=\"math\" name=\"math"+prefix+"_"+suffix+"\">\n" +
+                    "            <select class=\"math\" name=\"math"+prefix+"_"+suffix+"\" id='math"+prefix+"_"+suffix+"'>\n" +
                     "                <option value=\"0\">无</option>\n" +
                     "                <option value=\"1\">+</option>\n" +
                     "                <option value=\"2\">-</option>\n" +
