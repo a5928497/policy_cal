@@ -39,7 +39,33 @@ $(function () {
     $con_container.on("change",".math",function () {
         //若该项不是选择无，添加条件
         if ($(this).val() != 0 ){
-
+            var tmp_array = new Array();
+            //处理字符串
+            tmp_array = $(this).attr("name").split("_");
+            var next_symbol = tmp_array[0]+"_";
+            var prefix = parseInt(tmp_array[0].substring(4,6));
+            var suffix = parseInt(tmp_array[1]);
+            next_symbol = "#" + next_symbol+(suffix +1);
+            console.log($(next_symbol).length)
+            if ($(next_symbol).length == 0){
+                    suffix = suffix+1;
+                $(this).after("<select id=\"con_pd"+prefix+"_"+suffix+"\" name=\"con_pd"+prefix+"_"+suffix+"\">\n" +
+                    "                <option value=\"1\">--请先确认商品--</option>\n" +
+                    "            </select>\n" +
+                    "            <select id=\"con_std"+prefix+"_"+suffix+"\" name=\"con_std"+prefix+"_"+suffix+"\">\n" +
+                    "                <option value=\"0\">数量</option>\n" +
+                    "                <option value=\"1\">单价</option>\n" +
+                    "                <option value=\"2\">小计</option>\n" +
+                    "            </select>\n" +
+                    "            <select class=\"math\" name=\"math"+prefix+"_"+suffix+"\">\n" +
+                    "                <option value=\"0\">无</option>\n" +
+                    "                <option value=\"1\">+</option>\n" +
+                    "                <option value=\"2\">-</option>\n" +
+                    "                <option value=\"3\">*</option>\n" +
+                    "                <option value=\"4\">/(取整)</option>\n" +
+                    "                <option value=\"5\">/(四舍五入)</option>\n" +
+                    "            </select>");
+            }
         }
     });
 
